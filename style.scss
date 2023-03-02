@@ -1,0 +1,49 @@
+/* 
+Theme Name:     NMNM Storefront
+Theme URI:      https://s.tams.tech/wp-theme-nmnm-storefront/
+Description:    Storefront theme for the No Mugs No Masters page
+Author:         D. Scott Boggs
+Author URI:     https://tams.tech/@scott
+Template:       storefront
+Version:        1.0.1
+License:        GNU General Public License v3 or later
+License URI:    https://www.gnu.org/licenses/gpl-3.0.html
+Text Domain:    nmnmstorefront
+ */
+
+// Palette
+$red: #E61E15;
+$grey: #7A7478;
+$orange: #E68115;
+$pink: #FFB8AE;
+$green: #15E681;
+$purple: #720b98;
+
+/*
+    Register fonts
+*/
+@font-face {
+    font-family: 'Lambda-Regular';
+    src: url('fonts/lambda/Lambda-Regular.woff2');
+}
+
+.site-title {
+    font-family: 'Lambda-Regular', 'Arial', 'sans-serif';
+}
+
+/*
+    Done Registering fonts
+*/
+
+/* This hides the title on the homepage.
+
+   It's kind of a hack because it relies on the post ID, so someday when
+   someone comes along and wants to change up the homepage, they'll create a
+   new page, set it as the "primary page" or whatever wordpress calls it, and
+   be greatly confused as to why the new page suddenly has a title.
+
+   Does that mean I have a better way to do this? No.
+*/
+#post-943>.entry-header {
+    visibility: none;
+}
