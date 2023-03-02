@@ -5,7 +5,7 @@ Description:    Storefront theme for the No Mugs No Masters page
 Author:         D. Scott Boggs
 Author URI:     https://tams.tech/@scott
 Template:       storefront
-Version:        1.0.1
+Version:        1.0.7
 License:        GNU General Public License v3 or later
 License URI:    https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain:    nmnmstorefront
@@ -24,11 +24,12 @@ $purple: #720b98;
 */
 @font-face {
     font-family: 'Lambda-Regular';
-    src: url('fonts/lambda/Lambda-Regular.woff2');
+    src: url('assets/fonts/lambda/Lambda-Regular.woff2');
 }
 
-.site-title {
-    font-family: 'Lambda-Regular', 'Arial', 'sans-serif';
+@font-face {
+    font-family: 'Neon Sans';
+    src: url('assets/fonts/neon-sans/neonsans-webfont.woff2');
 }
 
 /*
@@ -45,5 +46,50 @@ $purple: #720b98;
    Does that mean I have a better way to do this? No.
 */
 #post-943>.entry-header {
-    visibility: none;
+    visibility: hidden;
+}
+
+.site-title {
+    font-family: 'Lambda-Regular', 'Arial', 'sans-serif';
+}
+
+body {
+    background-color: $pink;
+}
+
+.nmnm-storefront-scroll-photo {
+    position: absolute;
+    left: 0;
+    max-width: 100%;
+    object-fit: cover;
+    z-index: -1;
+    min-height: 400vh;
+}
+
+#nmnm-storefront-scroll-photo-spacer {
+    min-height: 400vh;
+}
+
+/* for the front-page scroll-by banner */
+.nmnm-storefront-centered-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+}
+
+/* for the front-page scroll-by banner */
+.nmnm-storefront-cup-world {
+    font-family: 'Neon Sans', Arial, Helvetica, sans-serif;
+    font-size: 8vw;
+    width: 90vw;
+    color: $green;
+    text-shadow: 0 0 2vw $green, -1px -1px black, -1px 1px black, 1px 1px black, 1px -1px black;
+    opacity: 0;
+}
+
+#nmnm-storefront-a-better-world {
+    font-style: italic;
 }
