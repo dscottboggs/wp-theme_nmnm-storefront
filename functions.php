@@ -7,7 +7,7 @@ function nmnm_storefront_import_scripts()
         'nmnm_storefront_fancy_scroll',
         get_stylesheet_directory_uri() . '/assets/fancy-scroll.js',
         array(),
-        '1.1.1',
+        '1.1.2',
         false
     );
     wp_enqueue_script(

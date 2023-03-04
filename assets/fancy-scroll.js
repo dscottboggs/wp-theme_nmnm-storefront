@@ -13,8 +13,8 @@ class FancyScrolled {
         this.outAt = outAt
         this.fadeInInterval = fadeInInterval
         this.fadeOutInterval = fadeOutInterval
-        this.fullyInAt = inAt + interval * 100
-        this.startFadingOutAt = outAt - interval * 100
+        this.fullyInAt = inAt + fadeInInterval * 100
+        this.startFadingOutAt = outAt - fadeOutInterval * 100
         this.opacity = this.opacity.bind(this)
         this.setOpacity = this.setOpacity.bind(this)
         this.handleScrollEvent = this.handleScrollEvent.bind(this)
@@ -29,7 +29,7 @@ class FancyScrolled {
         } else if ($yPos > this.fullyInAt && $yPos < this.startFadingOutAt) {
             return 100
         } else if ($yPos > this.startFadingOutAt && $yPos <= this.outAt) {
-            return Math.floor(Math.max(0, Math.min(100, (this.outAt - $yPos) / this.fadeInInterval)))
+            return Math.floor(Math.max(0, Math.min(100, (this.outAt - $yPos) / this.fadeOutInterval)))
         }
         return 0
     }
@@ -55,8 +55,8 @@ FancyScrolled.manageClass = function (className) {
             element.id,
             Number(element.dataset.fadeInAt),
             Number(element.dataset.fadeOutAt),
-            Number(element.dataset.intervalIn ?? DEFAULT_SCROLL_INTERVAL),
-            Number(element.dataset.intervalOut ?? DEFAULT_SCROLL_INTERVAL)
+            Number(element.dataset.intervalIn ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL),
+            Number(element.dataset.intervalOut ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL)
         )
     )
     window.addEventListener('scroll', event => {
