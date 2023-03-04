@@ -10,6 +10,7 @@ clean:
 	rm style.css
 
 publish:	style
-	scp -P $(sftp_port) -C ./style.css $(sftp_username)@$(sftp_ip):public_html/staging/wp-content/themes/nmnm-storefront/
-	scp -P $(sftp_port) -C ./functions.php $(sftp_username)@$(sftp_ip):public_html/staging/wp-content/themes/nmnm-storefront/
-	scp -P $(sftp_port) -C -r ./assets $(sftp_username)@$(sftp_ip):public_html/staging/wp-content/themes/nmnm-storefront/
+	rsync -aPe "ssh -p $(sftp_port)" ./ $(sftp_username)@$(sftp_ip):public_html/staging/wp-content/themes/nmnm-storefront/ \
+		--exclude style.scss --exclude style.css.map --exclude .git \
+		--exclude .gitignore --exclude Makefile --exclude assets/**/*.ttf \
+		--exclude assets/**/*.otf
