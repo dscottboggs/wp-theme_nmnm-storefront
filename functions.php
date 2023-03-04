@@ -1,6 +1,20 @@
 <?php
 add_action('wp_enqueue_scripts', 'nmnm_storefront_import_scripts');
+add_action('init', 'nmnm_storefront_action_init');
 
+/**
+ * Fires after WordPress has finished loading but before any headers are sent.
+ *
+ */
+function nmnm_storefront_action_init(): void
+{
+    add_post_type_support('page', array('excerpt'));
+}
+
+/**
+ * Fires when scripts and styles are enqueued.
+ *
+ */
 function nmnm_storefront_import_scripts()
 {
     wp_enqueue_script(
