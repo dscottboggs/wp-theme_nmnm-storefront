@@ -5,7 +5,7 @@ Description:    Storefront theme for the No Mugs No Masters page
 Author:         D. Scott Boggs
 Author URI:     https://tams.tech/@scott
 Template:       storefront
-Version:        1.2.1
+Version:        1.2.2
 License:        GNU General Public License v3 or later
 License URI:    https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain:    nmnmstorefront
@@ -18,6 +18,7 @@ $orange: #E68115;
 $pink: #FFB8AE;
 $green: #15E681;
 $purple: #720b98;
+$banner-offset: -100;
 
 /*
     Register fonts
@@ -195,12 +196,13 @@ body {
     left: 0;
     max-width: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: $banner-offset - 1;
     min-height: 400vh;
 }
 
 #nmnm-storefront-scroll-photo-spacer {
     min-height: 400vh;
+    z-index: $banner-offset;
 }
 
 /* for the front-page scroll-by banner */
@@ -209,7 +211,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: $banner-offset + 1;
     text-align: center;
 }
 
