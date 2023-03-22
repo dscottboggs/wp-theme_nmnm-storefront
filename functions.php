@@ -31,4 +31,11 @@ function nmnm_storefront_import_scripts()
         '1.0.1',
         false
     );
+    wp_enqueue_script(
+        'nmnm_storefront_wch_otd_script',
+        get_stylesheet_directory_uri() . '/assets/wch-otd.js',
+        array(),
+        '1.0.0',
+        false
+    );
 }
