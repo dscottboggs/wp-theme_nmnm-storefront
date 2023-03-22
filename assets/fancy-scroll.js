@@ -7,14 +7,26 @@ function window_scrollY_in_vh() {
 
 const DEFAULT_SCROLL_INTERVAL = 1
 class FancyScrolled {
-    constructor(id, inAt, outAt, fadeInInterval = DEFAULT_SCROLL_INTERVAL, fadeOutInterval = DEFAULT_SCROLL_INTERVAL) {
+    constructor(
+        id, landscapeInAt, landscapeOutAt, portraitInAt, portraitOutAt,
+        landscapeFadeInInterval = DEFAULT_SCROLL_INTERVAL,
+        portraitFadeInInterval = DEFAULT_SCROLL_INTERVAL,
+        landscapeFadeOutInterval = DEFAULT_SCROLL_INTERVAL,
+        portraitFadeOutInterval = DEFAULT_SCROLL_INTERVAL
+    ) {
         this.element = document.getElementById(id)
-        this.inAt = inAt
-        this.outAt = outAt
-        this.fadeInInterval = fadeInInterval
-        this.fadeOutInterval = fadeOutInterval
-        this.fullyInAt = inAt + fadeInInterval * 100
-        this.startFadingOutAt = outAt - fadeOutInterval * 100
+        this.landscapeInAt = landscapeInAt
+        this.landscapeOutAt = landscapeOutAt
+        this.portraitInAt = portraitInAt
+        this.portraitOutAt = portraitOutAt
+        this.landscapeFadeInInterval = landscapeFadeInInterval
+        this.landscapeFadeOutInterval = landscapeFadeOutInterval
+        this.portraitFadeInInterval = portraitFadeInInterval
+        this.portraitFadeOutInterval = portraitFadeOutInterval
+        this.landscapeFullyInAt = landscapeInAt + landscapeFadeInInterval * 100
+        this.landscapeStartFadingOutAt = landscapeOutAt - landscapeFadeOutInterval * 100
+        this.portraitFullyInAt = portraitInAt + landscapeFadeInInterval * 100
+        this.portraitStartFadingOutAt = portraitOutAt - landscapeFadeOutInterval * 100
         this.opacity = this.opacity.bind(this)
         this.setOpacity = this.setOpacity.bind(this)
         this.handleScrollEvent = this.handleScrollEvent.bind(this)
@@ -24,12 +36,23 @@ class FancyScrolled {
 
     opacity(yPos) {
         const $yPos = window_scrollY_in_vh(yPos)
-        if ($yPos > this.inAt && $yPos <= this.fullyInAt) {
-            return Math.floor(Math.max(0, Math.min(($yPos - this.inAt) / this.fadeInInterval, 100)))
-        } else if ($yPos > this.fullyInAt && $yPos < this.startFadingOutAt) {
-            return 100
-        } else if ($yPos > this.startFadingOutAt && $yPos <= this.outAt) {
-            return Math.floor(Math.max(0, Math.min(100, (this.outAt - $yPos) / this.fadeOutInterval)))
+        let orientation = screen?.orientation?.type
+        if (orientation?.startsWith('landscape') || !orientation) {
+            if ($yPos > this.landscapeInAt && $yPos <= this.landscapeFullyInAt) {
+                return Math.floor(Math.max(0, Math.min(($yPos - this.landscapeInAt) / this.landscapeFadeInInterval, 100)))
+            } else if ($yPos > this.landscapeFullyInAt && $yPos < this.landscapeStartFadingOutAt) {
+                return 100
+            } else if ($yPos > this.landscapeStartFadingOutAt && $yPos <= this.landscapeOutAt) {
+                return Math.floor(Math.max(0, Math.min(100, (this.landscapeOutAt - $yPos) / this.landscapeFadeOutInterval)))
+            }
+        } else {
+            if ($yPos > this.portraitInAt && $yPos <= this.portraitFullyInAt) {
+                return Math.floor(Math.max(0, Math.min(($yPos - this.portraitInAt) / this.portraitFadeInInterval, 100)))
+            } else if ($yPos > this.portraitFullyInAt && $yPos < this.portraitStartFadingOutAt) {
+                return 100
+            } else if ($yPos > this.portraitStartFadingOutAt && $yPos <= this.portraitOutAt) {
+                return Math.floor(Math.max(0, Math.min(100, (this.portraitOutAt - $yPos) / this.portraitFadeOutInterval)))
+            }
         }
         return 0
     }
@@ -53,10 +76,14 @@ FancyScrolled.manageClass = function (className) {
         $elements,
         element => new FancyScrolled(
             element.id,
-            Number(element.dataset.fadeInAt),
-            Number(element.dataset.fadeOutAt),
-            Number(element.dataset.intervalIn ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL),
-            Number(element.dataset.intervalOut ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL)
+            Number(element.dataset.landscapeFadeInAt ?? element.dataset.fadeInAt),
+            Number(element.dataset.landscapeFadeOutAt ?? element.dataset.fadeOutAt),
+            Number(element.dataset.portraitFadeInAt ?? element.dataset.fadeInAt),
+            Number(element.dataset.portraitFadeOutAt ?? element.dataset.fadeOutAt),
+            Number(element.dataset.landscapeIntervalIn ?? element.dataset.intervalIn ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL),
+            Number(element.dataset.landscapeIntervalOut ?? element.dataset.intervalOut ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL),
+            Number(element.dataset.portraitIntervalIn ?? element.dataset.intervalIn ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL),
+            Number(element.dataset.portraitIntervalOut ?? element.dataset.intervalOut ?? element.dataset.interval ?? DEFAULT_SCROLL_INTERVAL)
         )
     )
     window.addEventListener('scroll', event => {

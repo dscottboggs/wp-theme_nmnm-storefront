@@ -5,7 +5,7 @@ Description:    Storefront theme for the No Mugs No Masters page
 Author:         D. Scott Boggs
 Author URI:     https://tams.tech/@scott
 Template:       storefront
-Version:        1.2.2
+Version:        1.3.4
 License:        GNU General Public License v3 or later
 License URI:    https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain:    nmnmstorefront
@@ -147,22 +147,16 @@ $banner-offset: -100;
     Done Registering fonts
 */
 
-/* This hides the title on the homepage.
-
-   It's kind of a hack because it relies on the post ID, so someday when
-   someone comes along and wants to change up the homepage, they'll create a
-   new page, set it as the "primary page" or whatever wordpress calls it, and
-   be greatly confused as to why the new page suddenly has a title.
-
-   Does that mean I have a better way to do this? No.
+/*
+    This hides the title on the homepage.
 */
-#post-943>.entry-header {
+.page>.col-full>.entry-header {
     visibility: hidden;
     display: none;
 }
 
-#post-943>.entry-content {
-    margin-top: -5em;
+.page>.col-full>.entry-content {
+    margin-top: -8em;
 }
 
 .site-title,
@@ -193,17 +187,32 @@ body {
 
 .nmnm-storefront-scroll-photo {
     position: absolute;
-    left: 0;
-    max-width: 100%;
+    left: -30%;
+    max-width: 200%;
     object-fit: cover;
     z-index: $banner-offset - 1;
-    min-height: 400vh;
 }
 
-#nmnm-storefront-scroll-photo-spacer {
-    min-height: 400vh;
-    z-index: $banner-offset;
+@media (orientation: landscape) {
+    .nmnm-storefront-scroll-photo {
+        min-height: 400vh;
+    }
+
+    #nmnm-storefront-scroll-photo-spacer {
+        min-height: 400vh;
+    }
 }
+
+@media (orientation: portrait) {
+    .nmnm-storefront-scroll-photo {
+        min-height: 250vh;
+    }
+
+    #nmnm-storefront-scroll-photo-spacer {
+        min-height: 250vh;
+    }
+}
+
 
 /* for the front-page scroll-by banner */
 .nmnm-storefront-centered-content {
