@@ -35,7 +35,7 @@ function nmnm_storefront_import_scripts()
         'nmnm_storefront_wch_otd_script',
         get_stylesheet_directory_uri() . '/assets/wch-otd.js',
         array(),
-        '1.0.0',
+        '1.0.2',
         false
     );
 }

@@ -16,7 +16,8 @@ document.addEventListener('readystatechange', async function () {
             applyToAll('error', el => el.style.display = 'none')
             const data = await result.json()
             applyToAll('title', el => el.innerText = data.title)
-            applyToAll('description', el => el.innerText = data.description)
+            applyToAll('content', el => el.innerHTML = data.content)
+            applyToAll('excerpt', el => el.innerHTML = data.excerpt)
             applyToAll('story-link', el => el.href = data.url)
             if (data.media) {
                 applyToAll('media-placeholder', el => {
