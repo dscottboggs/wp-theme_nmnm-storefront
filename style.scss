@@ -5,7 +5,7 @@ Description:    Storefront theme for the No Mugs No Masters page
 Author:         D. Scott Boggs
 Author URI:     https://tams.tech/@scott
 Template:       storefront
-Version:        1.5.0
+Version:        1.6.4
 License:        GNU General Public License v3 or later
 License URI:    https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain:    nmnmstorefront
@@ -240,4 +240,11 @@ body {
 
 .site-header .site-branding img {
     max-width: 35rem;
+}
+
+.social-float {
+    max-width: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
 }

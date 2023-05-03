@@ -15,7 +15,7 @@ document.addEventListener('readystatechange', async function () {
         if (result.ok) {
             applyToAll('error', el => el.style.display = 'none')
             const data = await result.json()
-            applyToAll('title', el => el.innerText = data.title)
+            applyToAll('title', el => el.innerText += data.title)
             applyToAll('content', el => el.innerHTML = data.content)
             applyToAll('excerpt', el => el.innerHTML = data.excerpt)
             applyToAll('story-link', el => el.href = data.url)

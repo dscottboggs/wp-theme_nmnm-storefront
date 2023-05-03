@@ -12,6 +12,10 @@ clean:
 
 publish:	style
 	rsync -aPe "ssh -p $(sftp_port)" ./ $(sftp_username)@$(sftp_ip):public_html/wp-content/themes/$(theme_name)/ \
-		--exclude style.scss --exclude style.css.map --exclude .git \
-		--exclude .gitignore --exclude Makefile --exclude assets/**/*.ttf \
+		--exclude style.scss \
+		--exclude style.css.map \
+		--exclude .git \
+		--exclude .gitignore \
+		--exclude Makefile \
+		--exclude assets/**/*.ttf \
 		--exclude assets/**/*.otf
